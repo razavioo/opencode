@@ -107,7 +107,7 @@ export class ModelStatRepo extends Context.Service<ModelStatRepo, ModelStatRepo.
               ).map((row) => ({ ...row, uniqueUsers: 0 }))
             }
           },
-          catch: (cause) => DatabaseError.make({ cause }),
+          catch: (cause) => new DatabaseError({ cause }),
         })
       })
 
@@ -124,7 +124,7 @@ export class ModelStatRepo extends Context.Service<ModelStatRepo, ModelStatRepo.
                   return upsertModelChunk(chunk, false)
                 }
               },
-              catch: (cause) => DatabaseError.make({ cause }),
+              catch: (cause) => new DatabaseError({ cause }),
             }),
           { discard: true },
         )
@@ -188,7 +188,7 @@ export class ModelStatRepo extends Context.Service<ModelStatRepo, ModelStatRepo.
                   ),
                 ),
               ),
-          catch: (cause) => DatabaseError.make({ cause }),
+          catch: (cause) => new DatabaseError({ cause }),
         })
       })
 

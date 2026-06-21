@@ -73,7 +73,7 @@ export class ProviderStatRepo extends Context.Service<ProviderStatRepo, Provider
                 ),
               )
               .orderBy(asc(providerStat.period_key)),
-          catch: (cause) => DatabaseError.make({ cause }),
+          catch: (cause) => new DatabaseError({ cause }),
         })
       })
 
@@ -100,7 +100,7 @@ export class ProviderStatRepo extends Context.Service<ProviderStatRepo, Provider
                   eq(providerStat.source, opts.source ?? "all"),
                 ),
               ),
-          catch: (cause) => DatabaseError.make({ cause }),
+          catch: (cause) => new DatabaseError({ cause }),
         })
       })
 
@@ -117,7 +117,7 @@ export class ProviderStatRepo extends Context.Service<ProviderStatRepo, Provider
                   return upsertProviderChunk(chunk, false)
                 }
               },
-              catch: (cause) => DatabaseError.make({ cause }),
+              catch: (cause) => new DatabaseError({ cause }),
             }),
           { discard: true },
         )
@@ -181,7 +181,7 @@ export class ProviderStatRepo extends Context.Service<ProviderStatRepo, Provider
                   inArray(providerStat.provider, RETIRED_STAT_PROVIDERS),
                 ),
               ),
-          catch: (cause) => DatabaseError.make({ cause }),
+          catch: (cause) => new DatabaseError({ cause }),
         })
       })
 

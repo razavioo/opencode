@@ -98,7 +98,7 @@ export class GeoStatRepo extends Context.Service<GeoStatRepo, GeoStatRepo.Servic
                 ),
               )
               .orderBy(asc(geoStat.period_key)),
-          catch: (cause) => DatabaseError.make({ cause }),
+          catch: (cause) => new DatabaseError({ cause }),
         })
       })
 
@@ -129,7 +129,7 @@ export class GeoStatRepo extends Context.Service<GeoStatRepo, GeoStatRepo.Servic
                   eq(geoStat.model, opts.model ?? "all"),
                 ),
               ),
-          catch: (cause) => DatabaseError.make({ cause }),
+          catch: (cause) => new DatabaseError({ cause }),
         })
       })
 
@@ -146,7 +146,7 @@ export class GeoStatRepo extends Context.Service<GeoStatRepo, GeoStatRepo.Servic
                   return upsertGeoChunk(chunk, false)
                 }
               },
-              catch: (cause) => DatabaseError.make({ cause }),
+              catch: (cause) => new DatabaseError({ cause }),
             }),
           { discard: true },
         )
@@ -209,7 +209,7 @@ export class GeoStatRepo extends Context.Service<GeoStatRepo, GeoStatRepo.Servic
                   or(inArray(geoStat.provider, RETIRED_STAT_PROVIDERS), inArray(geoStat.model, RETIRED_STAT_MODELS)),
                 ),
               ),
-          catch: (cause) => DatabaseError.make({ cause }),
+          catch: (cause) => new DatabaseError({ cause }),
         })
       })
 
